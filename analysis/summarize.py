@@ -20,7 +20,7 @@ for path in sorted(glob.glob("logs/*.ulg")):
     ts, asp = ts[ok], asp[ok]
 
     f0 = te[np.where(ae > 0.3)[0][0]]
-    ag = ag - ag[tg < f0 - 10].mean()          # zemin ofsetini cikar
+    ag = ag - ag[tg < f0 - 10].mean()
     peak = asp.max()
     hv = ts[asp >= peak - 0.05]
     h0, h1 = hv.min() + 5, hv.max() - 5
