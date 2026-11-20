@@ -1,8 +1,7 @@
 #!/bin/bash
-N="$1"
-if [ -z "$N" ]; then echo "Numara yaz: bash save_flight.sh 03"; exit 1; fi
+NAME="$1"
+if [ -z "$NAME" ]; then echo "Kullanim: bash save_flight.sh vtol_explore_01"; exit 1; fi
 if pgrep -x px4 > /dev/null; then echo "DURDUM: PX4 hala calisiyor, once pxh> satirinda shutdown yaz"; exit 1; fi
-NAME="protocol_x500_$N"
 DEST="$HOME/px4-vtol-validation/logs/$NAME.ulg"
 LATEST=$(ls -t $HOME/PX4-Autopilot/build/px4_sitl_default/rootfs/fs/log/*/*.ulg | head -1)
 if [ -e "$DEST" ]; then echo "DURDUM: $DEST zaten var"; exit 1; fi
@@ -13,5 +12,5 @@ cp "$LATEST" "$DEST"
 cd $HOME/px4-vtol-validation
 .venv/bin/python3 analysis/summarize.py
 git add .
-git commit -m "Protokol ucusu $N"
+git commit -m "Ucus kaydi: $NAME"
 echo "TAMAM: $NAME kaydedildi"
