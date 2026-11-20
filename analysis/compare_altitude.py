@@ -14,7 +14,7 @@ gt = pd.DataFrame(ulog.get_dataset("vehicle_local_position_groundtruth").data)
 
 t_start = est["timestamp"].iloc[0]
 def tsec(df):
-    return ((df["timestamp"] - t_start) / 1e6).to_numpy()
+    return ((df["timestamp"].astype("int64") - int(t_start)) / 1e6).to_numpy()
 
 t_e, a_e = tsec(est), (-est["z"]).to_numpy()
 t_s, a_s = tsec(sp), (-sp["z"]).to_numpy()

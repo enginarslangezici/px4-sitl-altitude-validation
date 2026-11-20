@@ -12,7 +12,7 @@ for path in sorted(glob.glob("logs/*.ulg")):
     cmd = float(u.initial_parameters.get("MIS_TAKEOFF_ALT", 2.5))
 
     t0 = est["timestamp"].iloc[0]
-    sec = lambda d: ((d["timestamp"] - t0) / 1e6).to_numpy()
+    sec = lambda d: ((d["timestamp"].astype("int64") - int(t0)) / 1e6).to_numpy()
     te, ae = sec(est), (-est["z"]).to_numpy()
     ts, asp = sec(sp), (-sp["z"]).to_numpy()
     tg, ag = sec(gt), (-gt["z"]).to_numpy()

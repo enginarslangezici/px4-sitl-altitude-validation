@@ -68,3 +68,7 @@ python3 -m venv .venv
 ```
 
 Raw logs are not in the repository. The tables above come from `reports/summary.csv`.
+
+## Corrections
+
+- A timestamp subtraction used unsigned integers. In logs where the first ground-truth sample precedes the first estimate sample (six of nine x500 logs and both VTOL logs), some plots and the time-trace script showed a wrong flat ground-truth line. Fixed with signed subtraction. The summary tables were identical before and after the fix (diff of summary.csv), so the x500 results above are unchanged.
